@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tab Keeper</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body class="initializing">
+    <header class="topbar full_view">
+      <div class="brand">
+        <span class="brand_mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+        <div>
+          <h1>Tab Keeper</h1>
+          <p id="extension_status">正在读取设置</p>
+        </div>
+      </div>
+      <label class="switch" aria-label="启用重复标签提醒">
+        <input id="deduplication_enabled" type="checkbox">
+        <span class="switch_track" aria-hidden="true"></span>
+      </label>
+    </header>
+
+    <main>
+      <section
+        id="duplicate_decision"
+        class="duplicate_decision"
+        aria-labelledby="duplicate_decision_title"
+        hidden
+      >
+        <div class="decision_heading">
+          <div>
+            <span class="section_eyebrow">重复检测</span>
+            <h2 id="duplicate_decision_title">发现重复标签</h2>
+          </div>
+          <span id="pending_duplicate_count" class="pending_status"></span>
+        </div>
+        <div class="duplicate_meta">
+          <p id="duplicate_target_title"></p>
+          <p id="duplicate_target_url" class="duplicate_url"></p>
+        </div>
+        <figure id="target_preview" class="target_preview">
+          <span class="preview_label">旧标签预览</span>
+          <img id="target_preview_image" alt="旧标签页面缩略图" hidden>
+          <figcaption id="target_preview_fallback">旧页面预览暂不可用</figcaption>
+        </figure>
+        <div class="decision_actions">
+          <button id="close_existing" type="button">关闭旧标签</button>
+          <button id="keep_duplicate" class="secondary_button" type="button">
+            保留并分组
+          </button>
+          <button
+            id="clear_pending_duplicates"
+            class="secondary_button clear_pending_button full_view"
+            type="button"
+          >
+            清除待办
+          </button>
+        </div>
+      </section>
+
+      <section class="statistics full_view" aria-labelledby="statistics_title">
+        <div class="statistics_summary">
+          <div>
+            <span class="section_eyebrow">运行概览</span>
+            <h2 id="statistics_title">累计减少重复标签</h2>
+          </div>
+          <p class="statistics_value">
+            <strong id="duplicates_prevented">0</strong>
+            <span>个</span>
+          </p>
+        </div>
+        <p id="last_duplicate">暂无拦截记录</p>
+        <div class="current_scan">
+          <span id="current_duplicate_summary">正在扫描当前窗口</span>
+          <button id="cleanup_duplicates" class="secondary_button" type="button" disabled>
+            整理
+          </button>
+        </div>
+      </section>
+
+      <section class="matching_settings full_view" aria-labelledby="matching_title">
+        <h2 id="matching_title">匹配范围</h2>
+        <div class="segmented_control" role="radiogroup" aria-label="重复标签匹配范围">
+          <label>
+            <input
+              type="radio"
+              name="matching_strategy"
+              value="same_site"
+              aria-label="按同一网站匹配"
+            >
+            <span>同一网站</span>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="matching_strategy"
+              value="same_page"
+              aria-label="按同一页面匹配"
+            >
+            <span>同一页面</span>
+          </label>
+        </div>
+      </section>
+
+      <details id="history_panel" class="settings history_panel full_view">
+        <summary>
+          <span>访问记录</span>
+          <span id="history_count">0 条</span>
+        </summary>
+        <div class="history_body">
+          <label for="history_search">搜索网页标题</label>
+          <input
+            id="history_search"
+            type="search"
+            autocomplete="off"
+            placeholder="输入标题关键词"
+          >
+          <div id="history_results" class="history_results"></div>
+          <p id="history_empty" class="history_empty">暂无访问记录</p>
+        </div>
+      </details>
+
+      <details class="settings full_view">
+        <summary>
+          <span>允许重复的域名</span>
+          <span id="whitelist_count">0 个</span>
+        </summary>
+        <div class="settings_body">
+          <label for="domain_whitelist">域名列表</label>
+          <textarea
+            id="domain_whitelist"
+            rows="5"
+            spellcheck="false"
+            placeholder="mail.google.com&#10;docs.example.com"
+          ></textarea>
+          <div class="settings_footer">
+            <span id="save_status" role="status" aria-live="polite"></span>
+            <button id="save_settings" type="button">保存</button>
+          </div>
+        </div>
+      </details>
+    </main>
+
+    <script src="url_utils.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

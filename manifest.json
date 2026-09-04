@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Keeper",
+  "version": "1.3.0",
+  "description": "识别重复网页并记录可搜索的页面访问历史。",
+  "minimum_chrome_version": "102",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabGroups",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    },
+    "default_title": "Tab Keeper",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="#172127"/>
+  <rect
+    x="92"
+    y="104"
+    width="264"
+    height="220"
+    rx="42"
+    fill="#5bd6b0"
+  />
+  <rect
+    x="122"
+    y="142"
+    width="204"
+    height="152"
+    rx="22"
+    fill="#172127"
+  />
+  <rect
+    x="156"
+    y="184"
+    width="264"
+    height="220"
+    rx="42"
+    fill="#4169f6"
+  />
+  <rect
+    x="186"
+    y="222"
+    width="204"
+    height="152"
+    rx="22"
+    fill="#172127"
+  />
+  <circle cx="342" cy="330" r="44" fill="#5bd6b0"/>
+  <path
+    d="M320 330l15 15 29-32"
+    fill="none"
+    stroke="#172127"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="16"
+  />
+</svg>
