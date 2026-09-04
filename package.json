@@ -1,17 +1,17 @@
 {
-  "name": "tab-keeper-extension",
+  "name": "chrome-tab-cleaner",
   "version": "1.3.0",
   "private": true,
-  "description": "A lightweight Chrome extension for duplicate tabs and searchable page history.",
+  "description": "A privacy-first Chrome extension that detects duplicate tabs, preserves tab groups, and keeps searchable local history.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Amnesie1201/tab-keeper.git"
+    "url": "https://github.com/Amnesie1201/chrome-tab-cleaner.git"
   },
   "bugs": {
-    "url": "https://github.com/Amnesie1201/tab-keeper/issues"
+    "url": "https://github.com/Amnesie1201/chrome-tab-cleaner/issues"
   },
-  "homepage": "https://github.com/Amnesie1201/tab-keeper#readme",
+  "homepage": "https://github.com/Amnesie1201/chrome-tab-cleaner#readme",
   "scripts": {
     "check": "node --check background.js && node --check popup.js && node --check tab_utils.js && node --check url_utils.js",
     "test": "node --test"

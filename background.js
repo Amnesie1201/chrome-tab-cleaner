@@ -7,7 +7,7 @@ const DEFAULT_SETTINGS = Object.freeze({
   matching_strategy: "same_site"
 });
 
-const DUPLICATE_NOTIFICATION_PREFIX = "tab-keeper-duplicate";
+const DUPLICATE_NOTIFICATION_PREFIX = "chrome-tab-cleaner-duplicate";
 const ACKNOWLEDGED_DUPLICATES_KEY = "acknowledged_duplicate_urls";
 const PENDING_DUPLICATES_KEY = "pending_duplicate_decisions";
 const POPUP_LAUNCH_CONTEXT_KEY = "popup_launch_context";
@@ -127,7 +127,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   handleMessage(message)
     .then(sendResponse)
     .catch((error) => {
-      console.warn("Tab Keeper message failed:", error);
+      console.warn("Chrome Tab Cleaner message failed:", error);
       sendResponse({ error: error.message });
     });
 
@@ -165,7 +165,7 @@ function scheduleTabCheck(tabId, rawUrl, windowId) {
       await handleNavigatedTab(tabId, rawUrl, windowId);
     })
     .catch((error) => {
-      console.warn("Tab Keeper could not process a tab:", error);
+      console.warn("Chrome Tab Cleaner could not process a tab:", error);
     });
 }
 
@@ -273,7 +273,7 @@ function enqueueHistoryTask(task) {
   historyQueue = historyQueue
     .then(task)
     .catch((error) => {
-      console.warn("Tab Keeper could not update page history:", error);
+      console.warn("Chrome Tab Cleaner could not update page history:", error);
     });
   return historyQueue;
 }
@@ -530,7 +530,7 @@ async function showDuplicatePrompt(duplicateTabId, duplicateUrl, targetTab) {
       message: targetTab.title
         ? `“${targetTab.title}”已经打开。`
         : "这个网页已经在当前窗口打开。",
-      contextMessage: "Tab Keeper",
+      contextMessage: "Chrome Tab Cleaner",
       buttons: [
         { title: "关闭旧标签" },
         { title: "保留并分组" }
@@ -538,7 +538,7 @@ async function showDuplicatePrompt(duplicateTabId, duplicateUrl, targetTab) {
       requireInteraction: true
     });
   } catch (error) {
-    console.warn("Tab Keeper could not show a system notification:", error);
+    console.warn("Chrome Tab Cleaner could not show a system notification:", error);
   }
 
   if (typeof chrome.action.openPopup === "function") {
@@ -636,7 +636,7 @@ async function resolvePendingDuplicate(duplicateTabId, choice) {
     await refreshDecisionBadge();
     return { choice, resolved: true };
   } catch (error) {
-    console.warn("Tab Keeper could not apply the duplicate choice:", error);
+    console.warn("Chrome Tab Cleaner could not apply the duplicate choice:", error);
     return { error: error.message, resolved: false };
   }
 }
@@ -837,7 +837,7 @@ async function ensureTargetThumbnail(targetTab, duplicateTabId) {
     await wait(120);
     await captureTabThumbnail(targetTab.id, targetTab.windowId, true);
   } catch (error) {
-    console.debug("Tab Keeper could not create an on-demand thumbnail:", error);
+    console.debug("Chrome Tab Cleaner could not create an on-demand thumbnail:", error);
   } finally {
     try {
       await chrome.tabs.update(duplicateTabId, { active: true });
@@ -917,7 +917,7 @@ async function captureTabThumbnail(tabId, windowId, force = false) {
     });
     return dataUrl;
   } catch (error) {
-    console.debug("Tab Keeper could not capture a tab thumbnail:", error);
+    console.debug("Chrome Tab Cleaner could not capture a tab thumbnail:", error);
     return null;
   }
 }
